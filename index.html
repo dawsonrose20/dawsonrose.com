@@ -110,6 +110,12 @@
   .sec-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.03em; }
   .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
 
+  /* About */
+  .about { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: start; }
+  .about-lead { font-size: clamp(24px, 3vw, 32px); line-height: 1.25; letter-spacing: -0.02em; font-weight: 500; }
+  .about-body { display: flex; flex-direction: column; gap: 16px; color: var(--muted); font-size: 16.5px; }
+  .about-off { font-size: 13px; color: var(--trace); }
+
   /* Projects */
   .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .project {
@@ -130,6 +136,10 @@
   }
   .project.featured .visual { border-bottom: none; border-right: 1px solid var(--line); }
   .visual svg { width: 70%; max-width: 280px; height: auto; color: var(--accent); }
+  .visual img.photo {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 16px 16px 30px;
+    filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.25));
+  }
   .visual .ph {
     position: absolute; bottom: 10px; left: 12px;
     font-size: 10px; color: var(--muted); letter-spacing: .05em;
@@ -148,6 +158,9 @@
     font-family: "JetBrains Mono", monospace; font-size: 11px;
     border: 1px solid var(--line); padding: 3px 8px; border-radius: 4px;
   }
+
+  .more { font-size: 13px; color: var(--accent); text-decoration: none; }
+  .more:hover { text-decoration: underline; }
 
   /* Timeline */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
@@ -191,7 +204,8 @@
     nav ul { gap: 14px; }
     nav ul li.hide-sm { display: none; }
     .hero { padding: 64px 0 48px; }
-    .projects, .cols { grid-template-columns: 1fr; }
+    .projects, .cols, .about { grid-template-columns: 1fr; }
+    .about { gap: 20px; }
     .project.featured { grid-column: auto; flex-direction: column; }
     .project.featured .visual { border-right: none; border-bottom: 1px solid var(--line); min-height: 0; aspect-ratio: 16/9; }
     .specs div { border-right: none; border-bottom: 1px solid var(--line); }
@@ -206,6 +220,7 @@
   <div class="wrap">
     <a href="#top" class="logo">dawson<span>.</span>rose</a>
     <ul class="mono">
+      <li class="hide-sm"><a href="#about">about</a></li>
       <li><a href="#projects">projects</a></li>
       <li class="hide-sm"><a href="#experience">experience</a></li>
       <li class="hide-sm"><a href="#skills">skills</a></li>
@@ -216,11 +231,12 @@
 
 <header class="hero wrap" id="top">
   <div class="tag mono">ECE @ Northeastern · Boston, MA</div>
-  <h1>I build things that <em>blink, buzz,</em> and ship.</h1>
+  <h1>Hardware, code, and <em>everything in between.</em></h1>
   <p class="lede">I'm Dawson Rose, an Electrical &amp; Computer Engineering student at Northeastern University. I work across embedded systems, CAD and fabrication, and product, from EMG-driven assistive music devices to a startup trading app.</p>
   <div class="cta">
     <a class="btn primary" href="#projects">View projects ↓</a>
     <a class="btn" href="https://www.linkedin.com/in/dawson-rose-nu/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="btn" href="Dawson_Rose_Resume.pdf" target="_blank" rel="noopener">Resume (PDF) ↓</a>
     <a class="btn" href="mailto:rose.daw@northeastern.edu">Email me</a>
   </div>
 
@@ -233,8 +249,20 @@
 </header>
 
 <main>
+<section id="about" class="wrap">
+  <div class="sec-head"><span class="num mono">01</span><h2>About</h2><span class="rule"></span></div>
+  <div class="about reveal">
+    <p class="about-lead">I've been using PCs since I was a kid, and I've always wanted to know how they actually work.</p>
+    <div class="about-body">
+      <p>Heading into my senior year of high school, I wasn't sure what I wanted to do. A short stint in the robotics club settled it: I wanted to spend college building the hardware and code behind the machines I'd grown up with.</p>
+      <p>Electrical and computer engineering feels like the field most visibly at the front of human progress and innovation, and that's where I want to be. At Northeastern I'm doing that through hands-on builds: assistive devices, arcade machines, escape-room puzzles, and now circuit boards with Northeastern Electric Racing.</p>
+      <p class="mono about-off">Off the clock: snowboarding · leatherworking · golf · film</p>
+    </div>
+  </div>
+</section>
+
 <section id="projects" class="wrap">
-  <div class="sec-head"><span class="num mono">01</span><h2>Projects</h2><span class="rule"></span></div>
+  <div class="sec-head"><span class="num mono">02</span><h2>Projects</h2><span class="rule"></span></div>
 
   <div class="projects">
 
@@ -250,14 +278,15 @@
       </div>
       <div class="body">
         <div class="meta mono"><span>Jan 2026 – Apr 2026</span><span>Enabling Engineering</span></div>
-        <h3>Electromyography Music Device</h3>
-        <p>An Arduino-based assistive instrument that lets elementary school students with disabilities play along with songs using neck and jaw muscles.</p>
+        <h3>Muscle to Music: EMG Instrument</h3>
+        <p>Built for the music therapy program at the William E. Carter School, this assistive instrument lets students with limited movement below the neck play along in music class using their jaw and neck muscles.</p>
         <ul>
           <li>Captured neck and jaw muscle signals with Myoware EMG sensors</li>
           <li>Programmed real-time signal processing that turns EMG data into musical notes</li>
           <li>Integrated the sensor circuit with a teammate's Arduino code on a 5-person team</li>
         </ul>
-        <div class="chips"><span class="chip">Arduino</span><span class="chip">Myoware</span><span class="chip">Signal Processing</span><span class="chip">Assistive Tech</span></div>
+        <div class="chips"><span class="chip">Arduino Uno</span><span class="chip">Myoware 2.0</span><span class="chip">Signal Processing</span><span class="chip">3D Printing</span><span class="chip">Assistive Tech</span></div>
+        <a class="more mono" href="https://sites.google.com/husky.neu.edu/muscletomusic/home" target="_blank" rel="noopener">Full project site: client, build log, and demo video ↗</a>
       </div>
     </article>
 
@@ -287,14 +316,8 @@
     <!-- Centrifuge -->
     <article class="project reveal">
       <div class="visual">
-        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
-          <circle cx="100" cy="60" r="48"/>
-          <circle cx="100" cy="60" r="8"/>
-          <g transform="rotate(0 100 60)"><rect x="94" y="18" width="12" height="26" rx="6"/></g>
-          <g transform="rotate(120 100 60)"><rect x="94" y="18" width="12" height="26" rx="6"/></g>
-          <g transform="rotate(240 100 60)"><rect x="94" y="18" width="12" height="26" rx="6"/></g>
-        </svg>
-        <span class="ph mono">// photo coming soon</span>
+        <img class="photo" src="img/centrifuge.png" alt="Centrifuge puzzle: a 3D-printed centrifuge with three corked green vials on a gray control unit, mounted on a black base with buttons and LED bars">
+        <span class="ph mono">// final build</span>
       </div>
       <div class="body">
         <div class="meta mono"><span>Jan 2026 – Apr 2026</span><span>Live event · 40+ players</span></div>
@@ -357,7 +380,7 @@
 </section>
 
 <section id="experience" class="wrap">
-  <div class="sec-head"><span class="num mono">02</span><h2>Experience &amp; Leadership</h2><span class="rule"></span></div>
+  <div class="sec-head"><span class="num mono">03</span><h2>Experience &amp; Leadership</h2><span class="rule"></span></div>
   <div class="cols">
     <div class="reveal">
       <h3 class="col-title mono">Leadership</h3>
@@ -413,7 +436,7 @@
 </section>
 
 <section id="skills" class="wrap">
-  <div class="sec-head"><span class="num mono">03</span><h2>Toolkit</h2><span class="rule"></span></div>
+  <div class="sec-head"><span class="num mono">04</span><h2>Toolkit</h2><span class="rule"></span></div>
   <div class="skills">
     <div class="skill-box reveal">
       <h3 class="mono">Hardware &amp; Embedded</h3>
@@ -432,7 +455,7 @@
       <div class="chips"><span class="chip">Product Strategy</span><span class="chip">Pitching</span><span class="chip">Leadership</span><span class="chip">Client Relations</span><span class="chip">Self-Directed Work</span></div>
     </div>
   </div>
-  <p class="mono" style="margin-top:28px;font-size:13px;color:var(--muted)">Coursework: Enabling Engineering · Embedded Design · Circuits &amp; Signals &nbsp;|&nbsp; Off the clock: snowboarding, leatherworking, golf, film</p>
+  <p class="mono" style="margin-top:28px;font-size:13px;color:var(--muted)">Coursework: Enabling Engineering · Embedded Design · Circuits &amp; Signals</p>
 </section>
 
 <section id="contact" class="contact wrap">
@@ -441,6 +464,7 @@
   <div class="cta">
     <a class="btn primary" href="mailto:rose.daw@northeastern.edu">rose.daw@northeastern.edu</a>
     <a class="btn" href="https://www.linkedin.com/in/dawson-rose-nu/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="btn" href="Dawson_Rose_Resume.pdf" target="_blank" rel="noopener">Resume (PDF) ↓</a>
   </div>
 </section>
 </main>
