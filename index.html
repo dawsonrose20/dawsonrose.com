@@ -15,7 +15,6 @@
     --muted: #5d6068;
     --line: #d9d4c8;
     --grid: rgba(22, 24, 29, 0.05);
-    --card: #fbf9f4;
     --accent: #e8590c;
     --accent-soft: rgba(232, 89, 12, 0.1);
     --trace: #2f7d5b;
@@ -27,14 +26,13 @@
       --muted: #9a9ca3;
       --line: #2a2d34;
       --grid: rgba(236, 233, 226, 0.04);
-      --card: #181b20;
       --accent: #ff7a2e;
       --accent-soft: rgba(255, 122, 46, 0.12);
       --trace: #5cc495;
     }
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
   html { scroll-behavior: smooth; }
   body {
     font-family: "Space Grotesk", system-ui, sans-serif;
@@ -56,7 +54,6 @@
     position: sticky; top: 0; z-index: 10;
     background: color-mix(in srgb, var(--paper) 88%, transparent);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
   }
   nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
   nav .logo { font-weight: 700; text-decoration: none; letter-spacing: -0.02em; }
@@ -66,17 +63,9 @@
   nav ul a:hover { color: var(--accent); }
 
   /* Hero */
-  .hero { padding: 96px 0 72px; position: relative; }
-  .tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12px; color: var(--trace);
-    border: 1px solid var(--line); background: var(--card);
-    padding: 4px 10px; border-radius: 999px; margin-bottom: 28px;
-  }
-  .tag::before {
-    content: ""; width: 7px; height: 7px; border-radius: 50%;
-    background: var(--trace); animation: blink 2s infinite;
-  }
+  .hero { padding: 96px 0 40px; }
+  .tag { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; color: var(--trace); margin-bottom: 28px; }
+  .tag::before { content: ""; width: 7px; height: 7px; background: var(--trace); animation: blink 2s infinite; }
   @keyframes blink { 50% { opacity: 0.25; } }
   h1 {
     font-size: clamp(44px, 8vw, 88px); line-height: 0.98;
@@ -87,28 +76,21 @@
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
   .btn {
     font-family: "JetBrains Mono", monospace; font-size: 13px;
-    padding: 12px 18px; border: 1.5px solid var(--ink); border-radius: 6px;
+    padding: 12px 18px; border: 1.5px solid var(--ink);
     text-decoration: none; transition: transform .15s, box-shadow .15s;
   }
   .btn.primary { background: var(--ink); color: var(--paper); }
   .btn:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--accent); }
 
-  .specs {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    margin-top: 64px; border: 1px solid var(--line); border-radius: 10px;
-    background: var(--card); overflow: hidden;
-  }
-  .specs div { padding: 18px 20px; border-right: 1px solid var(--line); }
-  .specs div:last-child { border-right: none; }
+  .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 20px 40px; margin-top: 64px; }
   .specs dt { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-  .specs dd { font-weight: 500; margin-top: 4px; }
+  .specs dd { font-weight: 500; margin-top: 2px; }
 
-  /* Sections */
-  section { padding: 72px 0; }
-  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 36px; }
+  /* Sections: no dividers, the heading carries each transition */
+  section { padding: 64px 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px; }
   .sec-head .num { color: var(--accent); font-size: 13px; }
   .sec-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.03em; }
-  .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
 
   /* About */
   .about { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: start; }
@@ -116,28 +98,19 @@
   .about-body { display: flex; flex-direction: column; gap: 16px; color: var(--muted); font-size: 16.5px; }
   .about-off { font-size: 13px; color: var(--trace); }
 
-  /* Projects */
-  .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .project {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    overflow: hidden; display: flex; flex-direction: column;
-    transition: border-color .2s, transform .2s;
-  }
-  .project:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .project.featured { grid-column: span 2; flex-direction: row; }
-  .project.featured .visual { flex: 1 1 45%; aspect-ratio: auto; min-height: 280px; }
-  .project.featured .body { flex: 1 1 55%; }
+  /* Projects: open rows that alternate image side */
+  .projects { display: flex; flex-direction: column; gap: 88px; }
+  .project { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .project:nth-child(even) .visual { order: 2; }
 
   .visual {
-    aspect-ratio: 16 / 9; position: relative;
+    aspect-ratio: 4 / 3; position: relative;
     background: var(--accent-soft);
-    border-bottom: 1px solid var(--line);
     display: grid; place-items: center; overflow: hidden;
   }
-  .project.featured .visual { border-bottom: none; border-right: 1px solid var(--line); }
-  .visual svg { width: 70%; max-width: 280px; height: auto; color: var(--accent); }
+  .visual svg { width: 62%; max-width: 300px; height: auto; color: var(--accent); }
   .visual img.photo {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 16px 16px 30px;
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 20px 20px 34px;
     filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.25));
   }
   .visual .ph {
@@ -145,19 +118,16 @@
     font-size: 10px; color: var(--muted); letter-spacing: .05em;
   }
 
-  .body { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
-  .meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+  .body { display: flex; flex-direction: column; gap: 12px; }
+  .meta { display: flex; gap: 20px; font-size: 12px; color: var(--muted); }
   .meta .status { color: var(--trace); }
-  .project h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.2; }
-  .project p { color: var(--muted); font-size: 15px; }
-  .project ul { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; }
+  .project h3 { font-size: clamp(24px, 3vw, 30px); letter-spacing: -0.02em; line-height: 1.15; }
+  .project p { color: var(--muted); font-size: 15.5px; }
+  .project ul { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 15px; }
   .project li { padding-left: 18px; position: relative; }
   .project li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
-  .chip {
-    font-family: "JetBrains Mono", monospace; font-size: 11px;
-    border: 1px solid var(--line); padding: 3px 8px; border-radius: 4px;
-  }
+  .tools { font-size: 12px; color: var(--muted); padding-top: 4px; }
+  .tools span + span::before { content: " / "; color: var(--accent); }
 
   .more { font-size: 13px; color: var(--accent); text-decoration: none; }
   .more:hover { text-decoration: underline; }
@@ -168,9 +138,8 @@
   .timeline { list-style: none; border-left: 1.5px solid var(--line); }
   .timeline li { position: relative; padding: 0 0 28px 24px; }
   .timeline li::before {
-    content: ""; position: absolute; left: -6px; top: 6px;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--paper); border: 2px solid var(--accent);
+    content: ""; position: absolute; left: -5.5px; top: 7px;
+    width: 9px; height: 9px; background: var(--accent);
   }
   .timeline .role { font-weight: 700; }
   .timeline .org { color: var(--muted); font-size: 14px; }
@@ -178,18 +147,16 @@
   .timeline p { font-size: 14.5px; }
 
   /* Skills */
-  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-  .skill-box { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
-  .skill-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 14px; }
-  .skill-box .chips { padding-top: 0; }
-  .skill-box .chip { font-size: 12px; padding: 5px 10px; background: var(--paper); }
+  .skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .skills h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: 12px; }
+  .skills ul { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 15.5px; }
 
   /* Contact */
-  .contact { text-align: center; padding: 96px 0; }
+  .contact { text-align: center; padding: 96px 0 112px; }
   .contact h2 { font-size: clamp(36px, 6vw, 64px); letter-spacing: -0.04em; line-height: 1; }
   .contact p { color: var(--muted); margin: 16px auto 32px; max-width: 48ch; }
   .contact .cta { justify-content: center; }
-  footer { border-top: 1px solid var(--line); padding: 24px 0; font-size: 12px; color: var(--muted); }
+  footer { padding: 24px 0 32px; font-size: 12px; color: var(--muted); }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
   /* Reveal */
@@ -203,13 +170,14 @@
   @media (max-width: 760px) {
     nav ul { gap: 14px; }
     nav ul li.hide-sm { display: none; }
-    .hero { padding: 64px 0 48px; }
-    .projects, .cols, .about { grid-template-columns: 1fr; }
-    .about { gap: 20px; }
-    .project.featured { grid-column: auto; flex-direction: column; }
-    .project.featured .visual { border-right: none; border-bottom: 1px solid var(--line); min-height: 0; aspect-ratio: 16/9; }
-    .specs div { border-right: none; border-bottom: 1px solid var(--line); }
-    .specs div:last-child { border-bottom: none; }
+    .hero { padding: 64px 0 24px; }
+    section { padding: 48px 0; }
+    .cols, .about, .project { grid-template-columns: 1fr; }
+    .about, .project { gap: 20px; }
+    .projects { gap: 56px; }
+    .project:nth-child(even) .visual { order: 0; }
+    .specs { gap: 16px 32px; }
+    .skills { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
     .wrap { padding: 0 16px; }
   }
 </style>
@@ -250,7 +218,7 @@
 
 <main>
 <section id="about" class="wrap">
-  <div class="sec-head"><span class="num mono">01</span><h2>About</h2><span class="rule"></span></div>
+  <div class="sec-head"><span class="num mono">01</span><h2>About</h2></div>
   <div class="about reveal">
     <p class="about-lead">I've been using PCs since I was a kid, and I've always wanted to know how they actually work.</p>
     <div class="about-body">
@@ -262,14 +230,14 @@
 </section>
 
 <section id="projects" class="wrap">
-  <div class="sec-head"><span class="num mono">02</span><h2>Projects</h2><span class="rule"></span></div>
+  <div class="sec-head"><span class="num mono">02</span><h2>Projects</h2></div>
 
   <div class="projects">
 
-    <!-- Featured: EMG -->
-    <article class="project featured reveal">
+    <!-- EMG -->
+    <article class="project reveal">
       <div class="visual">
-        <!-- Replace with: <img src="img/emg.jpg" alt="..."> -->
+        <!-- Replace with: <img class="photo" src="img/emg.jpg" alt="..."> -->
         <svg viewBox="0 0 280 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polyline points="0,60 30,60 40,58 48,62 56,60 70,60 78,20 86,100 94,35 102,80 110,60 140,60 148,55 156,65 164,60 180,60 188,10 196,110 204,30 212,90 220,60 250,60 280,60"/>
           <g stroke-width="2"><circle cx="246" cy="30" r="6"/><line x1="252" y1="30" x2="252" y2="6"/><line x1="252" y1="6" x2="266" y2="10"/></g>
@@ -285,7 +253,7 @@
           <li>Programmed real-time signal processing that turns EMG data into musical notes</li>
           <li>Integrated the sensor circuit with a teammate's Arduino code on a 5-person team</li>
         </ul>
-        <div class="chips"><span class="chip">Arduino Uno</span><span class="chip">Myoware 2.0</span><span class="chip">Signal Processing</span><span class="chip">3D Printing</span><span class="chip">Assistive Tech</span></div>
+        <div class="tools mono"><span>Arduino Uno</span><span>Myoware 2.0</span><span>Signal Processing</span><span>3D Printing</span><span>Assistive Tech</span></div>
         <a class="more mono" href="https://sites.google.com/husky.neu.edu/muscletomusic/home" target="_blank" rel="noopener">Full project site: client, build log, and demo video ↗</a>
       </div>
     </article>
@@ -293,8 +261,8 @@
     <!-- Fantasy Stock -->
     <article class="project reveal">
       <div class="visual">
-        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="62" y="6" width="76" height="108" rx="12"/>
+        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+          <rect x="62" y="6" width="76" height="108"/>
           <polyline points="74,84 88,70 98,76 112,52 126,58"/>
           <polyline points="118,52 126,52 126,60"/>
           <line x1="88" y1="98" x2="112" y2="98"/>
@@ -309,7 +277,7 @@
           <li>Co-founded and built the app in Xcode using Claude Code</li>
           <li>Lead product strategy and pitch development for the Husky Startup Challenge, competing against 15 teams</li>
         </ul>
-        <div class="chips"><span class="chip">Xcode</span><span class="chip">Claude Code</span><span class="chip">Product Strategy</span><span class="chip">Pitching</span></div>
+        <div class="tools mono"><span>Xcode</span><span>Claude Code</span><span>Product Strategy</span><span>Pitching</span></div>
       </div>
     </article>
 
@@ -328,7 +296,7 @@
           <li>Designed the electrical housing in Illustrator and cut it on a commercial-grade laser cutter</li>
           <li>Integrated glass vials, 3D-printed parts, and electronics into the final build (4-person team)</li>
         </ul>
-        <div class="chips"><span class="chip">SolidWorks</span><span class="chip">Illustrator</span><span class="chip">Laser Cutting</span><span class="chip">3D Printing</span></div>
+        <div class="tools mono"><span>SolidWorks</span><span>Illustrator</span><span>Laser Cutting</span><span>3D Printing</span></div>
       </div>
     </article>
 
@@ -348,19 +316,19 @@
           <li>Designed the enclosure in AutoCAD and laser cut 7 parts for assembly</li>
           <li>Programmed the Arduino game logic for the timed spinning-light sequence (4-person team)</li>
         </ul>
-        <div class="chips"><span class="chip">Arduino</span><span class="chip">AutoCAD</span><span class="chip">Laser Cutting</span><span class="chip">Game Logic</span></div>
+        <div class="tools mono"><span>Arduino</span><span>AutoCAD</span><span>Laser Cutting</span><span>Game Logic</span></div>
       </div>
     </article>
 
     <!-- NER -->
     <article class="project reveal">
       <div class="visual">
-        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="30" y="14" width="140" height="92" rx="6"/>
-          <rect x="82" y="40" width="36" height="36" rx="2"/>
+        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+          <rect x="30" y="14" width="140" height="92"/>
+          <rect x="82" y="40" width="36" height="36"/>
           <polyline points="82,50 56,50 56,30"/><polyline points="82,66 48,66 48,90"/>
           <polyline points="118,50 146,50 146,28"/><polyline points="118,66 140,66 140,92"/>
-          <g fill="currentColor" stroke="none"><circle cx="56" cy="30" r="4"/><circle cx="48" cy="90" r="4"/><circle cx="146" cy="28" r="4"/><circle cx="140" cy="92" r="4"/></g>
+          <g fill="currentColor" stroke="none"><rect x="52" y="26" width="8" height="8"/><rect x="44" y="86" width="8" height="8"/><rect x="142" y="24" width="8" height="8"/><rect x="136" y="88" width="8" height="8"/></g>
         </svg>
         <span class="ph mono">// board render coming soon</span>
       </div>
@@ -372,7 +340,7 @@
           <li>Learning Altium Designer through the club's new-member onboarding program</li>
           <li>Practicing schematic design and component placement during weekly bay times</li>
         </ul>
-        <div class="chips"><span class="chip">Altium</span><span class="chip">PCB Design</span><span class="chip">Schematics</span></div>
+        <div class="tools mono"><span>Altium</span><span>PCB Design</span><span>Schematics</span></div>
       </div>
     </article>
 
@@ -380,7 +348,7 @@
 </section>
 
 <section id="experience" class="wrap">
-  <div class="sec-head"><span class="num mono">03</span><h2>Experience &amp; Leadership</h2><span class="rule"></span></div>
+  <div class="sec-head"><span class="num mono">03</span><h2>Experience &amp; Leadership</h2></div>
   <div class="cols">
     <div class="reveal">
       <h3 class="col-title mono">Leadership</h3>
@@ -436,26 +404,26 @@
 </section>
 
 <section id="skills" class="wrap">
-  <div class="sec-head"><span class="num mono">04</span><h2>Toolkit</h2><span class="rule"></span></div>
-  <div class="skills">
-    <div class="skill-box reveal">
+  <div class="sec-head"><span class="num mono">04</span><h2>Toolkit</h2></div>
+  <div class="skills reveal">
+    <div>
       <h3 class="mono">Hardware &amp; Embedded</h3>
-      <div class="chips"><span class="chip">Arduino</span><span class="chip">FPGA</span><span class="chip">Altium</span><span class="chip">Myoware Sensors</span><span class="chip">Multimeter</span></div>
+      <ul><li>Arduino</li><li>FPGA</li><li>Altium</li><li>Myoware Sensors</li><li>Multimeter</li></ul>
     </div>
-    <div class="skill-box reveal">
+    <div>
       <h3 class="mono">CAD &amp; Fabrication</h3>
-      <div class="chips"><span class="chip">SolidWorks</span><span class="chip">AutoCAD</span><span class="chip">Adobe Illustrator</span><span class="chip">3D Printing</span><span class="chip">Laser Cutting</span></div>
+      <ul><li>SolidWorks</li><li>AutoCAD</li><li>Adobe Illustrator</li><li>3D Printing</li><li>Laser Cutting</li></ul>
     </div>
-    <div class="skill-box reveal">
+    <div>
       <h3 class="mono">Software</h3>
-      <div class="chips"><span class="chip">Python</span><span class="chip">MATLAB</span><span class="chip">Claude Code</span><span class="chip">Xcode</span></div>
+      <ul><li>Python</li><li>MATLAB</li><li>Claude Code</li><li>Xcode</li></ul>
     </div>
-    <div class="skill-box reveal">
+    <div>
       <h3 class="mono">Beyond the Bench</h3>
-      <div class="chips"><span class="chip">Product Strategy</span><span class="chip">Pitching</span><span class="chip">Leadership</span><span class="chip">Client Relations</span><span class="chip">Self-Directed Work</span></div>
+      <ul><li>Product Strategy</li><li>Pitching</li><li>Leadership</li><li>Client Relations</li><li>Self-Directed Work</li></ul>
     </div>
   </div>
-  <p class="mono" style="margin-top:28px;font-size:13px;color:var(--muted)">Coursework: Enabling Engineering · Embedded Design · Circuits &amp; Signals</p>
+  <p class="mono" style="margin-top:36px;font-size:13px;color:var(--muted)">Coursework: Enabling Engineering · Embedded Design · Circuits &amp; Signals</p>
 </section>
 
 <section id="contact" class="contact wrap">
@@ -474,17 +442,19 @@
 </footer>
 
 <script>
-  // Cyclone ring: 16 LEDs with one "chasing" light and a fixed target
+  // Cyclone ring: 16 square LEDs with one "chasing" light and a fixed target
   (function () {
     const g = document.getElementById('ring');
     const n = 16, cx = 100, cy = 60, r = 44, target = 0;
     const leds = [];
     for (let i = 0; i < n; i++) {
       const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      c.setAttribute('cx', cx + r * Math.cos(a));
-      c.setAttribute('cy', cy + r * Math.sin(a));
-      c.setAttribute('r', i === target ? 7 : 5);
+      const s = i === target ? 13 : 9;
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      c.setAttribute('x', cx + r * Math.cos(a) - s / 2);
+      c.setAttribute('y', cy + r * Math.sin(a) - s / 2);
+      c.setAttribute('width', s);
+      c.setAttribute('height', s);
       c.setAttribute('opacity', 0.2);
       g.appendChild(c);
       leds.push(c);
