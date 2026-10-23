@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dawson Rose — Portfolio</title>
+<meta name="description" content="Dawson Rose — Electrical & Computer Engineering student at Northeastern University. Projects in embedded systems, fabrication, and product.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f1ea;
+    --ink: #16181d;
+    --muted: #5d6068;
+    --line: #d9d4c8;
+    --grid: rgba(22, 24, 29, 0.05);
+    --card: #fbf9f4;
+    --accent: #e8590c;
+    --accent-soft: rgba(232, 89, 12, 0.1);
+    --trace: #2f7d5b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121418;
+      --ink: #ece9e2;
+      --muted: #9a9ca3;
+      --line: #2a2d34;
+      --grid: rgba(236, 233, 226, 0.04);
+      --card: #181b20;
+      --accent: #ff7a2e;
+      --accent-soft: rgba(255, 122, 46, 0.12);
+      --trace: #5cc495;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+  nav .logo { font-weight: 700; text-decoration: none; letter-spacing: -0.02em; }
+  nav .logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 24px; }
+  nav ul a { text-decoration: none; font-size: 13px; color: var(--muted); }
+  nav ul a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero { padding: 96px 0 72px; position: relative; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--trace);
+    border: 1px solid var(--line); background: var(--card);
+    padding: 4px 10px; border-radius: 999px; margin-bottom: 28px;
+  }
+  .tag::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--trace); animation: blink 2s infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.25; } }
+  h1 {
+    font-size: clamp(44px, 8vw, 88px); line-height: 0.98;
+    letter-spacing: -0.04em; font-weight: 700; max-width: 14ch;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .hero p.lede { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 58ch; margin-top: 24px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .btn {
+    font-family: "JetBrains Mono", monospace; font-size: 13px;
+    padding: 12px 18px; border: 1.5px solid var(--ink); border-radius: 6px;
+    text-decoration: none; transition: transform .15s, box-shadow .15s;
+  }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--accent); }
+
+  .specs {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin-top: 64px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--card); overflow: hidden;
+  }
+  .specs div { padding: 18px 20px; border-right: 1px solid var(--line); }
+  .specs div:last-child { border-right: none; }
+  .specs dt { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .specs dd { font-weight: 500; margin-top: 4px; }
+
+  /* Sections */
+  section { padding: 72px 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 36px; }
+  .sec-head .num { color: var(--accent); font-size: 13px; }
+  .sec-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.03em; }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
+
+  /* Projects */
+  .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .project {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: border-color .2s, transform .2s;
+  }
+  .project:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project.featured { grid-column: span 2; flex-direction: row; }
+  .project.featured .visual { flex: 1 1 45%; aspect-ratio: auto; min-height: 280px; }
+  .project.featured .body { flex: 1 1 55%; }
+
+  .visual {
+    aspect-ratio: 16 / 9; position: relative;
+    background: var(--accent-soft);
+    border-bottom: 1px solid var(--line);
+    display: grid; place-items: center; overflow: hidden;
+  }
+  .project.featured .visual { border-bottom: none; border-right: 1px solid var(--line); }
+  .visual svg { width: 70%; max-width: 280px; height: auto; color: var(--accent); }
+  .visual .ph {
+    position: absolute; bottom: 10px; left: 12px;
+    font-size: 10px; color: var(--muted); letter-spacing: .05em;
+  }
+
+  .body { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+  .meta .status { color: var(--trace); }
+  .project h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.2; }
+  .project p { color: var(--muted); font-size: 15px; }
+  .project ul { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; }
+  .project li { padding-left: 18px; position: relative; }
+  .project li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+  .chip {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    border: 1px solid var(--line); padding: 3px 8px; border-radius: 4px;
+  }
+
+  /* Timeline */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .cols h3.col-title { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 20px; }
+  .timeline { list-style: none; border-left: 1.5px solid var(--line); }
+  .timeline li { position: relative; padding: 0 0 28px 24px; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -6px; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--accent);
+  }
+  .timeline .role { font-weight: 700; }
+  .timeline .org { color: var(--muted); font-size: 14px; }
+  .timeline .when { font-size: 12px; color: var(--trace); margin: 2px 0 6px; }
+  .timeline p { font-size: 14.5px; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .skill-box { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .skill-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 14px; }
+  .skill-box .chips { padding-top: 0; }
+  .skill-box .chip { font-size: 12px; padding: 5px 10px; background: var(--paper); }
+
+  /* Contact */
+  .contact { text-align: center; padding: 96px 0; }
+  .contact h2 { font-size: clamp(36px, 6vw, 64px); letter-spacing: -0.04em; line-height: 1; }
+  .contact p { color: var(--muted); margin: 16px auto 32px; max-width: 48ch; }
+  .contact .cta { justify-content: center; }
+  footer { border-top: 1px solid var(--line); padding: 24px 0; font-size: 12px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s, transform .6s; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .tag::before { animation: none; }
+  }
+
+  @media (max-width: 760px) {
+    nav ul { gap: 14px; }
+    nav ul li.hide-sm { display: none; }
+    .hero { padding: 64px 0 48px; }
+    .projects, .cols { grid-template-columns: 1fr; }
+    .project.featured { grid-column: auto; flex-direction: column; }
+    .project.featured .visual { border-right: none; border-bottom: 1px solid var(--line); min-height: 0; aspect-ratio: 16/9; }
+    .specs div { border-right: none; border-bottom: 1px solid var(--line); }
+    .specs div:last-child { border-bottom: none; }
+    .wrap { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo">dawson<span>.</span>rose</a>
+    <ul class="mono">
+      <li><a href="#projects">projects</a></li>
+      <li class="hide-sm"><a href="#experience">experience</a></li>
+      <li class="hide-sm"><a href="#skills">skills</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="tag mono">ECE @ Northeastern · Boston, MA</div>
+  <h1>I build things that <em>blink, buzz,</em> and ship.</h1>
+  <p class="lede">I'm Dawson Rose, an Electrical &amp; Computer Engineering student at Northeastern University. I work across embedded systems, CAD and fabrication, and product, from EMG-driven assistive music devices to a startup trading app.</p>
+  <div class="cta">
+    <a class="btn primary" href="#projects">View projects ↓</a>
+    <a class="btn" href="https://www.linkedin.com/in/dawson-rose-nu/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="btn" href="mailto:rose.daw@northeastern.edu">Email me</a>
+  </div>
+
+  <dl class="specs mono">
+    <div><dt>Degree</dt><dd>B.S. Electrical &amp; Computer Eng.</dd></div>
+    <div><dt>Graduating</dt><dd>May 2029</dd></div>
+    <div><dt>Focus</dt><dd>Embedded · Fabrication</dd></div>
+    <div><dt>Currently</dt><dd>PCB design @ NER</dd></div>
+  </dl>
+</header>
+
+<main>
+<section id="projects" class="wrap">
+  <div class="sec-head"><span class="num mono">01</span><h2>Projects</h2><span class="rule"></span></div>
+
+  <div class="projects">
+
+    <!-- Featured: EMG -->
+    <article class="project featured reveal">
+      <div class="visual">
+        <!-- Replace with: <img src="img/emg.jpg" alt="..."> -->
+        <svg viewBox="0 0 280 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="0,60 30,60 40,58 48,62 56,60 70,60 78,20 86,100 94,35 102,80 110,60 140,60 148,55 156,65 164,60 180,60 188,10 196,110 204,30 212,90 220,60 250,60 280,60"/>
+          <g stroke-width="2"><circle cx="246" cy="30" r="6"/><line x1="252" y1="30" x2="252" y2="6"/><line x1="252" y1="6" x2="266" y2="10"/></g>
+        </svg>
+        <span class="ph mono">// photo coming soon</span>
+      </div>
+      <div class="body">
+        <div class="meta mono"><span>Jan 2026 – Apr 2026</span><span>Enabling Engineering</span></div>
+        <h3>Electromyography Music Device</h3>
+        <p>An Arduino-based assistive instrument that lets elementary school students with disabilities play along with songs using neck and jaw muscles.</p>
+        <ul>
+          <li>Captured neck and jaw muscle signals with Myoware EMG sensors</li>
+          <li>Programmed real-time signal processing that turns EMG data into musical notes</li>
+          <li>Integrated the sensor circuit with a teammate's Arduino code on a 5-person team</li>
+        </ul>
+        <div class="chips"><span class="chip">Arduino</span><span class="chip">Myoware</span><span class="chip">Signal Processing</span><span class="chip">Assistive Tech</span></div>
+      </div>
+    </article>
+
+    <!-- Fantasy Stock -->
+    <article class="project reveal">
+      <div class="visual">
+        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="62" y="6" width="76" height="108" rx="12"/>
+          <polyline points="74,84 88,70 98,76 112,52 126,58"/>
+          <polyline points="118,52 126,52 126,60"/>
+          <line x1="88" y1="98" x2="112" y2="98"/>
+        </svg>
+        <span class="ph mono">// screenshots coming soon</span>
+      </div>
+      <div class="body">
+        <div class="meta mono"><span>Jan 2026 – Present</span><span class="status">● active</span></div>
+        <h3>Fantasy Stock Trading App</h3>
+        <p>A fantasy-football-style iOS app where users draft and manage portfolios of paper equities.</p>
+        <ul>
+          <li>Co-founded and built the app in Xcode using Claude Code</li>
+          <li>Lead product strategy and pitch development for the Husky Startup Challenge, competing against 15 teams</li>
+        </ul>
+        <div class="chips"><span class="chip">Xcode</span><span class="chip">Claude Code</span><span class="chip">Product Strategy</span><span class="chip">Pitching</span></div>
+      </div>
+    </article>
+
+    <!-- Centrifuge -->
+    <article class="project reveal">
+      <div class="visual">
+        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <circle cx="100" cy="60" r="48"/>
+          <circle cx="100" cy="60" r="8"/>
+          <g transform="rotate(0 100 60)"><rect x="94" y="18" width="12" height="26" rx="6"/></g>
+          <g transform="rotate(120 100 60)"><rect x="94" y="18" width="12" height="26" rx="6"/></g>
+          <g transform="rotate(240 100 60)"><rect x="94" y="18" width="12" height="26" rx="6"/></g>
+        </svg>
+        <span class="ph mono">// photo coming soon</span>
+      </div>
+      <div class="body">
+        <div class="meta mono"><span>Jan 2026 – Apr 2026</span><span>Live event · 40+ players</span></div>
+        <h3>Escape Room Centrifuge Puzzle</h3>
+        <p>A centrifuge-style puzzle built and delivered on deadline for a live escape room event.</p>
+        <ul>
+          <li>Engineered the mechanism in SolidWorks</li>
+          <li>Designed the electrical housing in Illustrator and cut it on a commercial-grade laser cutter</li>
+          <li>Integrated glass vials, 3D-printed parts, and electronics into the final build (4-person team)</li>
+        </ul>
+        <div class="chips"><span class="chip">SolidWorks</span><span class="chip">Illustrator</span><span class="chip">Laser Cutting</span><span class="chip">3D Printing</span></div>
+      </div>
+    </article>
+
+    <!-- Cyclone -->
+    <article class="project reveal">
+      <div class="visual">
+        <svg viewBox="0 0 200 120" fill="currentColor" aria-hidden="true">
+          <g id="ring"></g>
+        </svg>
+        <span class="ph mono">// photo coming soon</span>
+      </div>
+      <div class="body">
+        <div class="meta mono"><span>Nov 2025 – Dec 2025</span><span>7 laser-cut parts</span></div>
+        <h3>Cyclone Arcade Game</h3>
+        <p>A classic Cyclone arcade game: a light spins around a ring and players try to stop it on the target.</p>
+        <ul>
+          <li>Designed the enclosure in AutoCAD and laser cut 7 parts for assembly</li>
+          <li>Programmed the Arduino game logic for the timed spinning-light sequence (4-person team)</li>
+        </ul>
+        <div class="chips"><span class="chip">Arduino</span><span class="chip">AutoCAD</span><span class="chip">Laser Cutting</span><span class="chip">Game Logic</span></div>
+      </div>
+    </article>
+
+    <!-- NER -->
+    <article class="project reveal">
+      <div class="visual">
+        <svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="30" y="14" width="140" height="92" rx="6"/>
+          <rect x="82" y="40" width="36" height="36" rx="2"/>
+          <polyline points="82,50 56,50 56,30"/><polyline points="82,66 48,66 48,90"/>
+          <polyline points="118,50 146,50 146,28"/><polyline points="118,66 140,66 140,92"/>
+          <g fill="currentColor" stroke="none"><circle cx="56" cy="30" r="4"/><circle cx="48" cy="90" r="4"/><circle cx="146" cy="28" r="4"/><circle cx="140" cy="92" r="4"/></g>
+        </svg>
+        <span class="ph mono">// board render coming soon</span>
+      </div>
+      <div class="body">
+        <div class="meta mono"><span>Sep 2026 – Present</span><span class="status">● in progress</span></div>
+        <h3>Northeastern Electric Racing: First PCB</h3>
+        <p>Working toward designing and producing an original circuit board by the end of the semester.</p>
+        <ul>
+          <li>Learning Altium Designer through the club's new-member onboarding program</li>
+          <li>Practicing schematic design and component placement during weekly bay times</li>
+        </ul>
+        <div class="chips"><span class="chip">Altium</span><span class="chip">PCB Design</span><span class="chip">Schematics</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="experience" class="wrap">
+  <div class="sec-head"><span class="num mono">02</span><h2>Experience &amp; Leadership</h2><span class="rule"></span></div>
+  <div class="cols">
+    <div class="reveal">
+      <h3 class="col-title mono">Leadership</h3>
+      <ul class="timeline">
+        <li>
+          <div class="role">AI Advisory Board Member</div>
+          <div class="org">Student Government, Northeastern</div>
+          <div class="when mono">Apr 2026 – Present</div>
+          <p>One of 12 members selected from 50+ applicants. I advise university leadership on student-facing AI policy and present student feedback on proposed guidelines.</p>
+        </li>
+        <li>
+          <div class="role">Ambassador, Husky Startup Challenge</div>
+          <div class="org">Entrepreneurship Club</div>
+          <div class="when mono">Jan 2026 – Apr 2026</div>
+          <p>One of 30 students in the Ambassadors cohort. I built and pitched a startup concept to a judging panel against 15 teams.</p>
+        </li>
+        <li>
+          <div class="role">Member</div>
+          <div class="org">Northeastern Electric Racing · Beta Theta Pi</div>
+          <div class="when mono">2025 – Present</div>
+        </li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <h3 class="col-title mono">Work</h3>
+      <ul class="timeline">
+        <li>
+          <div class="role">Job Shadow</div>
+          <div class="org">Markforged · Waltham, MA</div>
+          <div class="when mono">Jun 2025</div>
+          <p>Traced parts from CAD model through print and post-processing, and documented 5+ production workflows at an industrial 3D printing company.</p>
+        </li>
+        <li>
+          <div class="role">Caddie</div>
+          <div class="org">Caddiemaster, TPC Boston · Norton, MA</div>
+          <div class="when mono">May 2026 – Aug 2026</div>
+          <p>Advised 10+ golfers per week on yardage, club selection, and strategy at a PGA Tour venue.</p>
+        </li>
+        <li>
+          <div class="role">Landscaper</div>
+          <div class="org">Knollwood Cemetery · Canton, MA</div>
+          <div class="when mono">Jun 2025 – Aug 2026</div>
+          <p>Maintained 340 acres of grounds on a weekly schedule with no direct supervision.</p>
+        </li>
+        <li>
+          <div class="role">Line Cook / Deli / Delivery</div>
+          <div class="org">Salem Food Market · Dedham, MA</div>
+          <div class="when mono">Mar 2024 – Jun 2025</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <div class="sec-head"><span class="num mono">03</span><h2>Toolkit</h2><span class="rule"></span></div>
+  <div class="skills">
+    <div class="skill-box reveal">
+      <h3 class="mono">Hardware &amp; Embedded</h3>
+      <div class="chips"><span class="chip">Arduino</span><span class="chip">FPGA</span><span class="chip">Altium</span><span class="chip">Myoware Sensors</span><span class="chip">Multimeter</span></div>
+    </div>
+    <div class="skill-box reveal">
+      <h3 class="mono">CAD &amp; Fabrication</h3>
+      <div class="chips"><span class="chip">SolidWorks</span><span class="chip">AutoCAD</span><span class="chip">Adobe Illustrator</span><span class="chip">3D Printing</span><span class="chip">Laser Cutting</span></div>
+    </div>
+    <div class="skill-box reveal">
+      <h3 class="mono">Software</h3>
+      <div class="chips"><span class="chip">Python</span><span class="chip">MATLAB</span><span class="chip">Claude Code</span><span class="chip">Xcode</span></div>
+    </div>
+    <div class="skill-box reveal">
+      <h3 class="mono">Beyond the Bench</h3>
+      <div class="chips"><span class="chip">Product Strategy</span><span class="chip">Pitching</span><span class="chip">Leadership</span><span class="chip">Client Relations</span><span class="chip">Self-Directed Work</span></div>
+    </div>
+  </div>
+  <p class="mono" style="margin-top:28px;font-size:13px;color:var(--muted)">Coursework: Enabling Engineering · Embedded Design · Circuits &amp; Signals &nbsp;|&nbsp; Off the clock: snowboarding, leatherworking, golf, film</p>
+</section>
+
+<section id="contact" class="contact wrap">
+  <h2>Let's build<br>something.</h2>
+  <p>I'm looking for co-op and internship opportunities in electrical and computer engineering. Reach out anytime.</p>
+  <div class="cta">
+    <a class="btn primary" href="mailto:rose.daw@northeastern.edu">rose.daw@northeastern.edu</a>
+    <a class="btn" href="https://www.linkedin.com/in/dawson-rose-nu/" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap mono"><span>© 2026 Dawson Rose</span><span>Boston, MA</span></div>
+</footer>
+
+<script>
+  // Cyclone ring: 16 LEDs with one "chasing" light and a fixed target
+  (function () {
+    const g = document.getElementById('ring');
+    const n = 16, cx = 100, cy = 60, r = 44, target = 0;
+    const leds = [];
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', cx + r * Math.cos(a));
+      c.setAttribute('cy', cy + r * Math.sin(a));
+      c.setAttribute('r', i === target ? 7 : 5);
+      c.setAttribute('opacity', 0.2);
+      g.appendChild(c);
+      leds.push(c);
+    }
+    let pos = 0;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const tick = () => {
+      leds.forEach((c, i) => c.setAttribute('opacity', i === pos ? 1 : i === target ? 0.45 : 0.2));
+      pos = (pos + 1) % n;
+    };
+    tick();
+    if (!reduce) setInterval(tick, 90);
+  })();
+
+  // Fade sections in on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
