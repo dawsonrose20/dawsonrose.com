@@ -303,10 +303,8 @@
     <!-- Cyclone -->
     <article class="project reveal">
       <div class="visual">
-        <svg viewBox="0 0 200 120" fill="currentColor" aria-hidden="true">
-          <g id="ring"></g>
-        </svg>
-        <span class="ph mono">// photo coming soon</span>
+        <img class="photo" src="img/cyclone.webp" alt="Cyclone arcade game: a laser-cut wooden box with finger-jointed edges, a ring of LEDs around the CYCLONE logo, a small display, and blue Start and gray Stop buttons">
+        <span class="ph mono">// final build</span>
       </div>
       <div class="body">
         <div class="meta mono"><span>Nov 2025 – Dec 2025</span><span>7 laser-cut parts</span></div>
@@ -442,33 +440,6 @@
 </footer>
 
 <script>
-  // Cyclone ring: 16 square LEDs with one "chasing" light and a fixed target
-  (function () {
-    const g = document.getElementById('ring');
-    const n = 16, cx = 100, cy = 60, r = 44, target = 0;
-    const leds = [];
-    for (let i = 0; i < n; i++) {
-      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-      const s = i === target ? 13 : 9;
-      const c = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      c.setAttribute('x', cx + r * Math.cos(a) - s / 2);
-      c.setAttribute('y', cy + r * Math.sin(a) - s / 2);
-      c.setAttribute('width', s);
-      c.setAttribute('height', s);
-      c.setAttribute('opacity', 0.2);
-      g.appendChild(c);
-      leds.push(c);
-    }
-    let pos = 0;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const tick = () => {
-      leds.forEach((c, i) => c.setAttribute('opacity', i === pos ? 1 : i === target ? 0.45 : 0.2));
-      pos = (pos + 1) % n;
-    };
-    tick();
-    if (!reduce) setInterval(tick, 90);
-  })();
-
   // Fade sections in on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
