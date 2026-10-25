@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muscle to Music — Dawson Rose</title>
+<meta name="description" content="Muscle to Music: an EMG instrument that lets students with limited movement below the neck play music with their jaw and neck muscles. Overview, parts list, and build guide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="../../" class="logo">dawson <span>rose</span></a>
+    <ul class="mono">
+      <li class="hide-sm"><a href="#overview">overview</a></li>
+      <li class="hide-sm"><a href="#parts">parts</a></li>
+      <li><a href="#build">build</a></li>
+      <li><a href="../../#projects">all projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero page-hero wrap" id="top">
+  <a class="back mono" href="../../#projects">← back to projects</a>
+  <div class="tag mono">Enabling Engineering · Jan 2026 – Apr 2026</div>
+  <h1>Muscle to <em>Music</em></h1>
+  <p class="lede">An EMG instrument that lets students with limited movement below the neck play along in music class, using their jaw and neck muscles to make notes.</p>
+  <div class="cta">
+    <a class="btn primary" href="#build">Build guide ↓</a>
+    <a class="btn" href="https://sites.google.com/husky.neu.edu/muscletomusic/final-product" target="_blank" rel="noopener">Demo video ↗</a>
+    <a class="btn" href="https://sites.google.com/husky.neu.edu/muscletomusic/weekly-updates" target="_blank" rel="noopener">Weekly build log ↗</a>
+  </div>
+
+  <dl class="specs mono">
+    <div><dt>Client</dt><dd>William E. Carter School</dd></div>
+    <div><dt>Team</dt><dd>5 engineers</dd></div>
+    <div><dt>My role</dt><dd>Electrical Engineer</dd></div>
+    <div><dt>Core parts</dt><dd>Arduino Uno · Myoware 2.0</dd></div>
+  </dl>
+
+  <div class="visual">
+    <!-- Replace with: <img class="photo" src="../../img/emg.jpg" alt="..."> -->
+    <svg viewBox="0 0 280 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="0,60 30,60 40,58 48,62 56,60 70,60 78,20 86,100 94,35 102,80 110,60 140,60 148,55 156,65 164,60 180,60 188,10 196,110 204,30 212,90 220,60 250,60 280,60"/>
+      <g stroke-width="2"><circle cx="246" cy="30" r="6"/><line x1="252" y1="30" x2="252" y2="6"/><line x1="252" y1="6" x2="266" y2="10"/></g>
+    </svg>
+    <span class="ph mono">// photo coming soon</span>
+  </div>
+</header>
+
+<main>
+<section id="overview" class="wrap">
+  <div class="sec-head"><span class="num mono">01</span><h2>The challenge</h2></div>
+  <div class="about reveal">
+    <p class="about-lead">Every student should be able to make music, including those who can't hold an instrument.</p>
+    <div class="prose">
+      <p>The William E. Carter School is a Boston public school for students aged 3 to 22 with intensive special needs and complex medical needs. Its music therapy program includes every student, but students with limited limb movement can't get the most out of hand-held instruments.</p>
+      <p>Our client wanted <strong>a real instrument that plays actual notes, not a game</strong>. Some students can only move their jaw or head, so the sensors had to work there. Because of sensory sensitivities, the electrodes also had to be comfortable to wear, ideally <strong>non-stick</strong>. We visited the class in person to see how students take part before we settled on a design.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="wrap">
+  <div class="sec-head"><span class="num mono">02</span><h2>How it works</h2></div>
+  <p class="prose reveal">When a muscle contracts, it gives off a tiny electrical signal called electromyography (EMG). The instrument picks up that signal on the jaw or neck, cleans it up, and turns each contraction into a musical note in real time.</p>
+  <ol class="flow reveal">
+    <li><b>Muscle</b><span>Jaw or neck contracts</span></li>
+    <li><b>Electrodes</b><span>Bar or sticky pads on the skin</span></li>
+    <li><b>Myoware 2.0</b><span>Amplifies and filters the EMG</span></li>
+    <li><b>Link shield</b><span>3.5 mm cable to the base</span></li>
+    <li><b>Arduino Uno</b><span>Reads and processes the signal</span></li>
+    <li><b>Laptop app</b><span>Plays the notes</span></li>
+  </ol>
+
+  <div class="subsys reveal" style="margin-top:64px">
+    <div>
+      <span class="label mono">Part 1</span>
+      <h3>The hardware</h3>
+      <p>An Arduino Uno with a Myoware Arduino Shield, in a 3D-printed case. It collects the EMG signal and sends it to the laptop over USB.</p>
+    </div>
+    <div>
+      <span class="label mono">Part 2</span>
+      <h3>The human connection</h3>
+      <p>Custom electrode leads run from the student to the Myoware muscle sensor. They work with both bar electrodes and reusable sticky electrodes.</p>
+    </div>
+    <div>
+      <span class="label mono">Part 3</span>
+      <h3>The software</h3>
+      <p>A laptop app built with a Google app builder. It takes the processed signal from a basic graph to a playable musical instrument.</p>
+    </div>
+  </div>
+</section>
+
+<section id="parts" class="wrap">
+  <div class="sec-head"><span class="num mono">03</span><h2>Parts list</h2></div>
+  <div class="reveal" style="overflow-x:auto">
+    <table class="parts">
+      <thead><tr><th>Part</th><th>Used in</th><th>Where to buy</th></tr></thead>
+      <tbody>
+        <tr><td>Myoware Muscle Sensor 2.0</td><td class="used mono">Human connection</td><td><a href="https://www.sparkfun.com/myoware-2-muscle-sensor.html" target="_blank" rel="noopener">SparkFun ↗</a></td></tr>
+        <tr><td>Myoware Link Shield</td><td class="used mono">Human connection</td><td><a href="https://www.sparkfun.com/myoware-2-0-link-shield.html" target="_blank" rel="noopener">SparkFun ↗</a></td></tr>
+        <tr><td>Myoware Arduino Shield</td><td class="used mono">Hardware</td><td><a href="https://www.sparkfun.com/myoware-2-0-arduino-shield.html" target="_blank" rel="noopener">SparkFun ↗</a></td></tr>
+        <tr><td>Arduino Uno R3</td><td class="used mono">Hardware</td><td><a href="https://store-usa.arduino.cc/products/arduino-uno-rev3" target="_blank" rel="noopener">Arduino Store ↗</a></td></tr>
+        <tr><td>USB A to USB B cable</td><td class="used mono">Hardware</td><td><a href="https://www.amazon.com/dp/B000E5BKQE" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+        <tr><td>Compact 3.5 mm male-to-male cable (×2)</td><td class="used mono">Hardware</td><td><a href="https://www.amazon.com/dp/B07D1Z6PZL" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+        <tr><td>Bar EMG electrodes</td><td class="used mono">Human connection</td><td><a href="https://mfimedical.com/products/mfi-medical-bar-emg-electrode" target="_blank" rel="noopener">MFI Medical ↗</a></td></tr>
+        <tr><td>Flexible silicone wire</td><td class="used mono">Human connection</td><td><a href="https://www.amazon.com/dp/B01KQ2JNLI" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+        <tr><td>Heat shrink tubing</td><td class="used mono">Human connection</td><td><a href="https://www.amazon.com/dp/B07WWWPR2X" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+        <tr><td>Reusable sticky electrodes, nylon braided wire cover</td><td class="used mono">Human connection</td><td class="used">—</td></tr>
+        <tr><td>3D-printed case, foam pads, laptop</td><td class="used mono">Hardware / Software</td><td class="used">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="build" class="wrap">
+  <div class="sec-head"><span class="num mono">04</span><h2>Build it yourself</h2></div>
+  <div class="build">
+
+    <article class="build-step reveal">
+      <div>
+        <span class="label mono">Part 1</span>
+        <h3>The hardware</h3>
+        <ul class="needs">
+          <li>Arduino Uno R3</li><li>Myoware Arduino Shield</li><li>USB A to B cable</li>
+          <li>2 × 3.5 mm male-to-male cables</li><li>3D-printed case and foam pads</li>
+        </ul>
+      </div>
+      <div>
+        <p class="summary">This part collects the EMG signal and sends it to the laptop. It's mostly simple assembly, but take care to seat the Myoware shield on the Arduino correctly.</p>
+        <ol class="steps">
+          <li>Attach the Myoware Arduino Shield to the Arduino board.</li>
+          <li>Plug the two 3.5 mm cables into two different ports on the Myoware Link Shield.</li>
+          <li>3D print the housing.</li>
+          <li>Fit the Arduino assembly into the printed housing.</li>
+          <li>Route the cable out through the port.</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="build-step reveal">
+      <div>
+        <span class="label mono">Part 2</span>
+        <h3>The human connection</h3>
+        <ul class="needs">
+          <li>Myoware Muscle Sensor 2.0</li><li>Myoware Link Shield</li><li>Bar and sticky electrodes</li>
+          <li>Wire and heat shrink</li><li>Nylon braided wire cover</li>
+        </ul>
+      </div>
+      <div>
+        <p class="summary">This part carries the signal from the student to the Myoware sensor, and from there into the Arduino for processing. You'll need soldering equipment and a heat gun.</p>
+        <ol class="steps">
+          <li>Cut off the white snap connectors that come with the reusable sticky electrodes. These become an adapter that works with both bar electrodes and sticky electrodes.</li>
+          <li>Solder about 3–4 ft of wire to each cut-off snap connector to lengthen the leads, which attach to the Myoware muscle sensor.
+            <ul>
+              <li>Use a different color for one wire so it's easy to tell it's the reference (ground).</li>
+              <li>Cover each soldered joint with heat shrink.</li>
+            </ul>
+          </li>
+          <li>Feed all three wires through the nylon braided cover.</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="build-step reveal">
+      <div>
+        <span class="label mono">Part 3</span>
+        <h3>The software</h3>
+        <ul class="needs"><li>Laptop</li></ul>
+      </div>
+      <div>
+        <p class="summary">The app turns the processed signal into music. At first it only showed the EMG as a live graph. The final version plays real notes, so students can play along with songs.</p>
+        <p class="note mono">The code and a demo video are on the <a href="https://sites.google.com/husky.neu.edu/muscletomusic/build-it-yourself" target="_blank" rel="noopener" style="color:inherit">team's project site ↗</a></p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="team" class="wrap">
+  <div class="sec-head"><span class="num mono">05</span><h2>The team</h2></div>
+  <ul class="team reveal">
+    <li><b>Sidra Ansari</b><span>Electrical / Computer Eng.</span></li>
+    <li><b>Hansen Cao</b><span>Computer Eng.</span></li>
+    <li><b>Alan Huang</b><span>Computer Eng.</span></li>
+    <li><b>Maria Olano</b><span>Electrical Eng.</span></li>
+    <li class="me"><b>Dawson Rose</b><span>Electrical Eng.</span></li>
+  </ul>
+</section>
+
+<section class="contact wrap">
+  <h2>See the rest<br>of my work.</h2>
+  <p>Muscle to Music is one of several hands-on builds from my time at Northeastern.</p>
+  <div class="cta">
+    <a class="btn primary" href="../../#projects">← All projects</a>
+    <a class="btn" href="mailto:rose.daw@northeastern.edu">Email me</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap mono"><span>© 2026 Dawson Rose</span><span>Boston, MA</span></div>
+</footer>
+
+<script>
+  // Fade sections in on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
