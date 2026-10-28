@@ -16,7 +16,7 @@
   <div class="wrap">
     <a href="../../" class="logo">dawson <span>rose</span></a>
     <ul class="mono">
-      <li class="hide-sm"><a href="#overview">overview</a></li>
+      <li class="hide-sm"><a href="#my-part">my part</a></li>
       <li class="hide-sm"><a href="#parts">parts</a></li>
       <li><a href="#build">build</a></li>
       <li><a href="../../#projects">all projects</a></li>
@@ -28,7 +28,7 @@
   <a class="back mono" href="../../#projects">← back to projects</a>
   <div class="tag mono">Enabling Engineering · Jan 2026 – Apr 2026</div>
   <h1>Muscle to <em>Music</em></h1>
-  <p class="lede">An EMG instrument that lets students with limited movement below the neck play along in music class, using their jaw and neck muscles to make notes.</p>
+  <p class="lede">Some students at the William E. Carter School can't hold an instrument. This one lets them play notes by flexing their jaw or neck muscles. I handled the electrodes and wiring.</p>
   <div class="cta">
     <a class="btn primary" href="#build">Build guide ↓</a>
     <a class="btn" href="https://sites.google.com/husky.neu.edu/muscletomusic/final-product" target="_blank" rel="noopener">Demo video ↗</a>
@@ -38,7 +38,7 @@
   <dl class="specs mono">
     <div><dt>Client</dt><dd>William E. Carter School</dd></div>
     <div><dt>Team</dt><dd>5 engineers</dd></div>
-    <div><dt>My role</dt><dd>Electrical Engineer</dd></div>
+    <div><dt>My part</dt><dd>Electrodes and wiring</dd></div>
     <div><dt>Core parts</dt><dd>Arduino Uno · Myoware 2.0</dd></div>
   </dl>
 
@@ -52,20 +52,34 @@
 <section id="overview" class="wrap">
   <div class="sec-head"><span class="num mono">01</span><h2>The challenge</h2></div>
   <div class="about reveal">
-    <p class="about-lead">Every student should be able to make music, including those who can't hold an instrument.</p>
+    <p class="about-lead">Some of the students can only move their jaw or head. We wanted them to be able to play in music class anyway.</p>
     <div class="prose">
-      <p>The William E. Carter School is a Boston public school for students aged 3 to 22 with intensive special needs and complex medical needs. Its music therapy program includes every student, but students with limited limb movement can't get the most out of hand-held instruments.</p>
-      <p>Our client wanted <strong>a real instrument that plays actual notes, not a game</strong>. Some students can only move their jaw or head, so the sensors had to work there. Because of sensory sensitivities, the electrodes also had to be comfortable to wear, ideally <strong>non-stick</strong>. We visited the class in person to see how students take part before we settled on a design.</p>
+      <p>The William E. Carter School is a Boston public school for students aged 3 to 22 with intensive special needs and complex medical needs. Everyone takes music class, but hand-held instruments don't work for students with limited limb movement.</p>
+      <p>The teachers asked for <strong>a real instrument that plays actual notes, not a game</strong>. They also asked for <strong>non-stick electrodes</strong>, because some students are sensitive to things stuck on their skin. We visited the class before we settled on a design.</p>
+    </div>
+  </div>
+</section>
+
+<section id="my-part" class="wrap">
+  <div class="sec-head"><span class="num mono">02</span><h2>My part</h2></div>
+  <div class="about reveal">
+    <p class="about-lead">The hardest problem was noise, and most of it came down to the electrodes.</p>
+    <div class="prose">
+      <p>I was in charge of the connection between the student and the sensor: the electrodes, and the wiring that runs to the Myoware muscle sensors.</p>
+      <p>The teachers wanted non-stick electrodes, so I led the troubleshooting to find ones that would work. I made a spreadsheet of a lot of different electrode types and set aside money in our budget so we could actually buy and test them. Nothing non-stick gave us a clean signal. Only stick-on electrodes did. So we found a <strong>washable, reusable</strong> version, and the teachers don't have to keep buying new ones.</p>
+      <p>To keep noise out of the cables, I soldered the connections between the electrodes and the sensors and made sure every joint was solid. We ran the wires through a nylon braided cover to protect them.</p>
+      <p>We originally planned to use an ESP32. We switched to an Arduino Uno because it was easier to code and to connect over USB to the custom program on our laptop.</p>
+      <p>At the end, a student used it in class, and it worked. The teachers were very happy. It was an emotional moment.</p>
     </div>
   </div>
 </section>
 
 <section id="how" class="wrap">
-  <div class="sec-head"><span class="num mono">02</span><h2>How it works</h2></div>
+  <div class="sec-head"><span class="num mono">03</span><h2>How it works</h2></div>
   <p class="prose reveal">When a muscle contracts, it gives off a tiny electrical signal called electromyography (EMG). The instrument picks up that signal on the jaw or neck, cleans it up, and turns each contraction into a musical note in real time.</p>
   <ol class="flow reveal">
     <li><b>Muscle</b><span>Jaw or neck contracts</span></li>
-    <li><b>Electrodes</b><span>Bar or sticky pads on the skin</span></li>
+    <li><b>Electrodes</b><span>Washable stick-on pads</span></li>
     <li><b>Myoware 2.0</b><span>Amplifies and filters the EMG</span></li>
     <li><b>Link shield</b><span>3.5 mm cable to the base</span></li>
     <li><b>Arduino Uno</b><span>Reads and processes the signal</span></li>
@@ -81,7 +95,7 @@
     <div>
       <span class="label mono">Part 2</span>
       <h3>The human connection</h3>
-      <p>Custom electrode leads run from the student to the Myoware muscle sensor. They work with both bar electrodes and reusable sticky electrodes.</p>
+      <p>Washable stick-on electrodes, with soldered leads running through a braided cover to the Myoware muscle sensor. This was my part.</p>
     </div>
     <div>
       <span class="label mono">Part 3</span>
@@ -92,7 +106,7 @@
 </section>
 
 <section id="parts" class="wrap">
-  <div class="sec-head"><span class="num mono">03</span><h2>Parts list</h2></div>
+  <div class="sec-head"><span class="num mono">04</span><h2>Parts list</h2></div>
   <div class="reveal" style="overflow-x:auto">
     <table class="parts">
       <thead><tr><th>Part</th><th>Used in</th><th>Where to buy</th></tr></thead>
@@ -114,7 +128,7 @@
 </section>
 
 <section id="build" class="wrap">
-  <div class="sec-head"><span class="num mono">04</span><h2>Build it yourself</h2></div>
+  <div class="sec-head"><span class="num mono">05</span><h2>Build it yourself</h2></div>
   <div class="build">
 
     <article class="build-step reveal">
@@ -178,7 +192,7 @@
 </section>
 
 <section id="team" class="wrap">
-  <div class="sec-head"><span class="num mono">05</span><h2>The team</h2></div>
+  <div class="sec-head"><span class="num mono">06</span><h2>The team</h2></div>
   <ul class="team reveal">
     <li><b>Sidra Ansari</b><span>Electrical / Computer Eng.</span></li>
     <li><b>Hansen Cao</b><span>Computer Eng.</span></li>
