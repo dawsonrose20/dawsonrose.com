@@ -84,7 +84,7 @@ section { padding: 64px 0; }
 /* About */
 .about { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: start; }
 .about-side { display: flex; flex-direction: column; gap: 24px; }
-.headshot { width: 100%; max-width: 320px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
+.headshot { width: 100%; max-width: 240px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
 .about-lead { font-size: clamp(24px, 3vw, 32px); line-height: 1.25; letter-spacing: -0.02em; font-weight: 500; }
 .about-body { display: flex; flex-direction: column; gap: 16px; color: var(--muted); font-size: 16.5px; }
 .about-off { font-size: 13px; color: var(--trace); }
@@ -165,7 +165,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
   section { padding: 48px 0; }
   .cols, .about, .project { grid-template-columns: 1fr; }
   .about, .project { gap: 20px; }
-  .headshot { max-width: 240px; }
+  .headshot { max-width: 180px; }
   .projects { gap: 56px; }
   .project:nth-child(even) .visual { order: 0; }
   .specs { gap: 16px 32px; }
